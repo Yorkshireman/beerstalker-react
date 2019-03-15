@@ -1,0 +1,10 @@
+{
+  "name": "lookup-server",
+  "version": "0.0.1",
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
