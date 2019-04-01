@@ -15,8 +15,8 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', async ({ query: { city } }, res) => {
   const meetupApiData = await getMeetupApiData(city, meetupApiKey);
-  const events = JSON.parse(meetupApiData).results || [];
-  const freeBeerEvents = extractFreeBeerEvents(events);
+  const { results } = JSON.parse(meetupApiData);
+  const freeBeerEvents = extractFreeBeerEvents(results);
   res.send(freeBeerEvents);
 });
 
