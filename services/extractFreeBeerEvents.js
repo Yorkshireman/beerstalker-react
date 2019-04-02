@@ -1,25 +1,23 @@
 module.exports = events => {
   if (!events || !events.length) {
-    return [];
+    throw new TypeError('Events missing', 'extractFreeBeerEvents.js');
   }
 
   const freeBeerEvents = [];
 
-  if (events.length) {
-    for (index = 0; index < events.length; index++) {
-      const event = events[index].description;
+  for (index = 0; index < events.length; index++) {
+    const event = events[index].description;
 
-      try {
-        event.indexOf('free beer');
-      } catch {
-        break;
-      }
+    try {
+      event.indexOf('free beer');
+    } catch {
+      break;
+    }
 
-      if (event.indexOf('free beer') >= 0) {
-        freeBeerEvents.push(events[index]);
-      }
+    if (event.indexOf('free beer') >= 0) {
+      freeBeerEvents.push(events[index]);
     }
   }
 
-  return freeBeerEvents;
+  return !freeBeerEvents.length ? null : freeBeerEvents;
 }

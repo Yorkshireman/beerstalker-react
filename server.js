@@ -1,23 +1,28 @@
 const express = require('express');
-const extractFreeBeerEvents = require('./services/extractFreeBeerEvents');
+const buildFreeBeerEvents = require('./services/buildFreeBeerEvents');
 const getMeetupApiData = require('./services/getMeetupApiData');
 
 require('dotenv').config();
+const environment = process.env.NODE_ENV;
+const meetupApiKey = process.env.MEETUP_API_KEY;
+const port = process.env.PORT;
 
 const app = express();
-const meetupApiKey = process.env.MEETUP_API_KEY;
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', port || 3001);
 
-if (process.env.NODE_ENV === 'production') {
+if (environment === 'production') {
   app.use(express.static('client/build'));
 }
 
-app.get('/', async ({ query: { city } }, res) => {
+app.get('/free-beer-events', async ({ query: { city } }, res) => {
   const meetupApiData = await getMeetupApiData(city, meetupApiKey);
-  const { results } = JSON.parse(meetupApiData);
-  const freeBeerEvents = extractFreeBeerEvents(results);
-  res.send(freeBeerEvents);
+  const freeBeerEvents = buildFreeBeerEvents(meetupApiData);
+  if (freeBeerEvents) {
+    res.send(freeBeerEvents);
+  } else {
+    res.sendStatus(204);
+  }
 });
 
 app.listen(app.get('port'), () => {
