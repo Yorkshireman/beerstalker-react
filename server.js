@@ -1,46 +1,28 @@
 const express = require('express');
-const request = require('request');
+const buildFreeBeerEvents = require('./services/buildFreeBeerEvents');
+const getMeetupApiData = require('./services/getMeetupApiData');
 
 require('dotenv').config();
+const environment = process.env.NODE_ENV;
+const meetupApiKey = process.env.MEETUP_API_KEY;
+const port = process.env.PORT;
 
 const app = express();
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', port || 3001);
 
-if (process.env.NODE_ENV === 'production') {
+if (environment === 'production') {
   app.use(express.static('client/build'));
 }
 
-app.get('/', ({ query: { city } }, res) => {
-  const meetupApiKey = process.env.MEETUP_API_KEY;
-  const path = `https://api.meetup.com/2/open_events.json?and_text=true&text=free+beer&country=gb&city=${city}&key=${meetupApiKey}&text_format=plain&order=distance`;
-  request(path, (error, response, body) => {
-    console.log('error:', error);
-    console.log('statusCode:', response && response.statusCode);
-
-    const { results } = JSON.parse(body);
-    const filteredResults = [];
-
-    for (index = 0; index < results.length; index++) {
-      const result = results[index].description;
-
-      try {
-        result.indexOf('free beer');
-      } catch {
-        break;
-      }
-
-      if (result.indexOf('free beer') >= 0) {
-        filteredResults.push(results[index]);
-      }
-    }
-
-    console.log('============== start ================');
-    console.log(JSON.stringify(filteredResults, null, 2));
-    console.log('=============== end ===============');
-
-    res.send(filteredResults);
-  });
+app.get('/free-beer-events', async ({ query: { city } }, res) => {
+  const meetupApiData = await getMeetupApiData(city, meetupApiKey);
+  const freeBeerEvents = buildFreeBeerEvents(meetupApiData);
+  if (freeBeerEvents) {
+    res.send(freeBeerEvents);
+  } else {
+    res.sendStatus(204);
+  }
 });
 
 app.listen(app.get('port'), () => {
