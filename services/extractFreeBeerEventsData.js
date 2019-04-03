@@ -1,6 +1,6 @@
 module.exports = events => {
   if (!events || !events.length) {
-    throw new TypeError('Events missing', 'extractFreeBeerEvents.js');
+    throw new TypeError('Events missing', 'extractFreeBeerEventsData.js');
   }
 
   const freeBeerEvents = [];

@@ -1,4 +1,5 @@
-const extractFreeBeerEvents = require('./extractFreeBeerEvents');
+const meetupEvent = require('../models/meetupEvent');
+const extractFreeBeerEventsData = require('./extractFreeBeerEventsData');
 
 module.exports = apiData => {
   if (!apiData) {
@@ -6,10 +7,11 @@ module.exports = apiData => {
   }
 
   const { results: events } = JSON.parse(apiData.body);
-
   if (!events || !events.length) {
     return null;
   }
 
-  return extractFreeBeerEvents(events);
+  const freeBeerEventsData = extractFreeBeerEventsData(events);
+  return freeBeerEventsData &&
+    freeBeerEventsData.map(eventData => meetupEvent(eventData));
 };
