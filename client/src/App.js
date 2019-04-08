@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Events from './Events';
+import LocationForm from './LocationForm';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleLocationFormSubmit = this.handleLocationFormSubmit.bind(this);
+  }
+
+  handleLocationFormSubmit(event) {
+    console.log('A location was submitted: ' + this.state.value);
+    this.setState({ value: '', events: [{ name: 'Event 1' }, { name: 'Event 2' }] });
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <main>
+          <section>
+            <LocationForm handleSubmit={this.handleLocationFormSubmit} />
+          </section>
+          <section>
+            <Events events={this.state.events || []} />
+          </section>
+        </main>
       </div>
     );
   }
