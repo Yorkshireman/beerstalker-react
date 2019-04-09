@@ -3,7 +3,7 @@ import React from 'react';
 import Events from './Events';
 import EventsSource from './EventsSource';
 
-class LocationForm extends React.Component {
+class FormAndEventsWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -46,4 +46,4 @@ class LocationForm extends React.Component {
   }
 }
 
-export default LocationForm;
+export default FormAndEventsWrapper;
