@@ -12,7 +12,7 @@ const app = express();
 
 app.set('port', port || 3001);
 
-if (environment === 'production') {
+if (environment === 'production' || environment === 'staging') {
   app.use(express.static('client/build'));
 }
 
