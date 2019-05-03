@@ -1,5 +1,6 @@
 const express = require('express');
 const buildFreeBeerEvents = require('./services/buildFreeBeerEvents');
+const buildFreePizzaEvents = require('./services/buildFreePizzaEvents');
 const getMeetupApiData = require('./services/getMeetupApiData');
 
 require('dotenv').config();

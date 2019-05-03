@@ -37,6 +37,7 @@ class FormAndEventsWrapper extends React.Component {
               <input type="text" value={this.state.value} onChange={this.handleChange} />
             </label>
             <input type="submit" value="Find free beer" />
+            <input type="submit" value="Find free pizza" />
           </form>
         </section>
         {this.state.events &&
