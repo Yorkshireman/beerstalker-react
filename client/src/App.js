@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormAndEventsWrapper from './FormAndEventsWrapper';
+import FormAndEventsWrapper from './containers/FormAndEventsWrapper';
 
 class App extends Component {
   render() {

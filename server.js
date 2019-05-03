@@ -26,6 +26,16 @@ app.get('/free-beer-events', async ({ query: { city } }, res) => {
   }
 });
 
+app.get('/free-pizza-events', async ({ query: { city } }, res) => {
+  const meetupApiData = await getMeetupApiData(city, meetupApiBaseUrl, meetupApiKey);
+  const freePizzaEvents = buildFreePizzaEvents(meetupApiData);
+  if (freePizzaEvents) {
+    res.send(freePizzaEvents);
+  } else {
+    res.sendStatus(204);
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Listening on port http://localhost:${app.get('port')}`);
 });

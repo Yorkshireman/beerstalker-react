@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Events from './Events';
-import EventsSource from './EventsSource';
+import Events from '../components/Events';
+import EventsSource from '../components/EventsSource';
 
 class FormAndEventsWrapper extends React.Component {
   constructor(props) {
