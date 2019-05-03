@@ -20,8 +20,10 @@ app.get('/free-beer-events', async ({ query: { city } }, res) => {
   const meetupApiData = await getMeetupApiData(city, meetupApiBaseUrl, meetupApiKey);
   const freeBeerEvents = buildFreeBeerEvents(meetupApiData);
   if (freeBeerEvents) {
+    console.log('Number of free beer events found: ', freeBeerEvents.length);
     res.send(freeBeerEvents);
   } else {
+    console.log('No free beer events found.');
     res.sendStatus(204);
   }
 });
