@@ -1,5 +1,6 @@
 const express = require('express');
 const buildFreeBeerEvents = require('./services/buildFreeBeerEvents');
+const buildFreePizzaEvents = require('./services/buildFreePizzaEvents');
 const getMeetupApiData = require('./services/getMeetupApiData');
 
 require('dotenv').config();
@@ -24,6 +25,18 @@ app.get('/free-beer-events', async ({ query: { city } }, res) => {
     res.send(freeBeerEvents);
   } else {
     console.log('No free beer events found.');
+    res.sendStatus(204);
+  }
+});
+
+app.get('/free-pizza-events', async ({ query: { city } }, res) => {
+  const meetupApiData = await getMeetupApiData(city, meetupApiBaseUrl, meetupApiKey);
+  const freePizzaEvents = buildFreePizzaEvents(meetupApiData);
+  if (freePizzaEvents) {
+    console.log('Number of free pizza events found: ', freePizzaEvents.length);
+    res.send(freePizzaEvents);
+  } else {
+    console.log('No free pizza events found.');
     res.sendStatus(204);
   }
 });

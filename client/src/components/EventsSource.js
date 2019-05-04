@@ -1,5 +1,5 @@
-const search = (city, cb) => {
-  return fetch(`free-beer-events?city=${city}`, {
+const search = (city, selection, cb)  => {
+  return fetch(`free-${selection}-events?city=${city}`, {
     accept: "application/json"
   })
     .then(checkStatus)
@@ -9,6 +9,7 @@ const search = (city, cb) => {
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
+    
     return response;
   }
 

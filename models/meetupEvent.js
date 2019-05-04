@@ -10,7 +10,7 @@ module.exports = eventData => {
     utc_offset,
     venue
   } = eventData;
-
+  
   let address1;
   let googleMapsUrl;
   if (venue && venue.address_1 && venue.city) {
