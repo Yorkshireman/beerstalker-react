@@ -12,17 +12,19 @@ module.exports = eventData => {
     name,
     time,
     utc_offset,
-    venue: {
-      address_1: address1,
-      city
-    }
+    venue
   } = eventData;
   
 
-  const dateTime = new Date(time + utc_offset);
-  const q = encodeURI(`${address1} ${city}`);
-  const googleMapsUrl = `https://maps.google.com?q=${q}`;
+  let address1;
+  let googleMapsUrl;
+  if (venue && venue.address_1 && venue.city) {
+    address1 = venue.address_1;
+    const q = encodeURI(`${address1} ${venue.city}`);
+    googleMapsUrl = `https://maps.google.com?q=${q}`;
+  }
 
+  const dateTime = new Date(time + utc_offset);
   return {
     address1,
     dateTime,

@@ -7,6 +7,7 @@ module.exports = apiData => {
 
   const { results: events } = JSON.parse(apiData.body);
   if (!events || !events.length) {
+    console.log('No events of any kind found.');
     return null;
   }
 
