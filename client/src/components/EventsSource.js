@@ -1,14 +1,5 @@
-const search = (city, cb) => {
-  return fetch(`free-beer-events?city=${city}`, {
-    accept: "application/json"
-  })
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(cb);
-}
-
-const searchPizza = (city, cb) => {
-  return fetch(`free-pizza-events?city=${city}`, {
+const search = (city, selection, cb)  => {
+  return fetch(`free-${selection}-events?city=${city}`, {
     accept: "application/json"
   })
     .then(checkStatus)
@@ -37,5 +28,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const EventsSource = { search, searchPizza };
+const EventsSource = { search };
 export default EventsSource;
