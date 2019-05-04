@@ -12,8 +12,6 @@ module.exports = apiData => {
     }
 
     const freePizzaEventsData = events.filter(({ description }) => {
-        console.log(description);
-
         return description && description.includes('free pizza')
     });
 

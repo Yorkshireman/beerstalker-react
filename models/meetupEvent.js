@@ -1,10 +1,6 @@
 module.exports = eventData => {
-  console.log(eventData);
-  
-  
   if (!eventData) {
     throw new TypeError('eventData undefined', 'meetupEvent.js');
-    
   }
 
   const {
@@ -15,7 +11,6 @@ module.exports = eventData => {
     venue
   } = eventData;
   
-
   let address1;
   let googleMapsUrl;
   if (venue && venue.address_1 && venue.city) {
