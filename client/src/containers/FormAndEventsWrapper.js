@@ -11,7 +11,7 @@ class FormAndEventsWrapper extends React.Component {
     this.state = { value: '' };
   }
 
-  handleChange({ target: { value } }) {
+  handleChange({ target: { value } }) {    
     this.setState({ value });
   }
 
@@ -29,15 +29,15 @@ class FormAndEventsWrapper extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="formWrapper">
         <section>
           <form onSubmit={this.handleSubmit}>
             <label>
               City:
               <input type="text" value={this.state.value} onChange={this.handleChange} />
             </label>
-            <input type="submit" value="Find free beer" />
-            <input type="submit" value="Find free pizza" />
+            <input className="input" type="submit" value="Find free beer" />
+            <input className="input" type="submit" value="Find free pizza" />
           </form>
         </section>
         {this.state.events &&

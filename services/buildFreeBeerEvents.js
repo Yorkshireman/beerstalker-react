@@ -11,7 +11,9 @@ module.exports = apiData => {
   }
 
   const freeBeerEventsData = events.filter(({ description }) => {
-    return description && description.includes('free beer')
+    console.log(description);
+    
+    return description && description.includes('and')
   });
 
   return freeBeerEventsData.length ? freeBeerEventsData.map(eventData => meetupEvent(eventData)) : null;

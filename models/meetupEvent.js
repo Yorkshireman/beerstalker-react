@@ -1,6 +1,10 @@
 module.exports = eventData => {
+  console.log(eventData);
+  
+  
   if (!eventData) {
     throw new TypeError('eventData undefined', 'meetupEvent.js');
+    
   }
 
   const {
@@ -13,6 +17,7 @@ module.exports = eventData => {
       city
     }
   } = eventData;
+  
 
   const dateTime = new Date(time + utc_offset);
   const q = encodeURI(`${address1} ${city}`);
