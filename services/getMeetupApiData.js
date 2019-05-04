@@ -10,6 +10,7 @@ module.exports = (city, apiBaseUrl, apiKey) => {
 
   return promisifiedRequest(`${path}?${queryParams}`)
     .then(data => {
+      console.log(data);
       console.log('Meetup API returned status code:', data.statusCode);
       
       return data;

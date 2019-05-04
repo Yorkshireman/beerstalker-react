@@ -7,6 +7,15 @@ const search = (city, cb) => {
     .then(cb);
 }
 
+const searchPizza = (city, cb) => {
+  return fetch(`free-pizza-events?city=${city}`, {
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     
@@ -28,5 +37,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const EventsSource = { search };
+const EventsSource = { search, searchPizza };
 export default EventsSource;

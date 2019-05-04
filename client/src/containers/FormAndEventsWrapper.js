@@ -8,6 +8,7 @@ class FormAndEventsWrapper extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAltSubmit = this.handleAltSubmit.bind(this);
     this.state = { value: '' };
   }
 
@@ -27,6 +28,17 @@ class FormAndEventsWrapper extends React.Component {
     event.preventDefault();
   }
 
+  handleAltSubmit(event) {
+    const { value: location } = this.state;
+    console.log('A location was submitted: ' + location);
+
+    EventsSource.searchPizza(location, events => {
+      this.setState({ value: '', events });
+    });
+
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div className="formWrapper">
@@ -37,7 +49,7 @@ class FormAndEventsWrapper extends React.Component {
               <input type="text" value={this.state.value} onChange={this.handleChange} />
             </label>
             <input className="input" type="submit" value="Find free beer" />
-            <input className="input" type="submit" value="Find free pizza" />
+            <input className="input" type="submit" onClick={this.handleAltSubmit} value="Find free pizza" />
           </form>
         </section>
         {this.state.events &&

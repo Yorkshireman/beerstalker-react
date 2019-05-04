@@ -33,8 +33,10 @@ app.get('/free-pizza-events', async ({ query: { city } }, res) => {
   const meetupApiData = await getMeetupApiData(city, meetupApiBaseUrl, meetupApiKey);
   const freePizzaEvents = buildFreePizzaEvents(meetupApiData);
   if (freePizzaEvents) {
+    console.log('Number of free pizza events found: ', freePizzaEvents.length);
     res.send(freePizzaEvents);
   } else {
+    console.log('No free pizza events found.');
     res.sendStatus(204);
   }
 });
