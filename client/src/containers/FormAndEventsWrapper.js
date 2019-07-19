@@ -18,7 +18,7 @@ class FormAndEventsWrapper extends React.Component {
     this.setState({ selection: event.target.value })
   }
 
-  handleChange({ target: { value } }) {    
+  handleChange({ target: { value } }) {
     this.setState({ value });
   }
 
@@ -29,7 +29,7 @@ class FormAndEventsWrapper extends React.Component {
 
     EventsSource.search(location, choice, events => {
       console.log(events);
-      
+
       this.setState({ value: '', events });
     });
 
@@ -37,23 +37,23 @@ class FormAndEventsWrapper extends React.Component {
   }
 
   render() {
+    const { events, selection, value } = this.state;
     return (
       <div className="formWrapper">
         <section>
           <form onSubmit={this.handleSubmit}>
             <label>
               City:
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <input type="text" value={value} onChange={this.handleChange} />
             </label>
-            <select value={this.state.selection} onChange={this.handleSelection}>
+            <select value={selection} onChange={this.handleSelection}>
               <option value="beer">Beer</option>
               <option value="pizza">Pizza</option>
             </select>
             <input className="input" type="submit" value="Find free event" />
           </form>
         </section>
-        {this.state.events &&
-        <Events events={this.state.events} />}
+        {events && <Events events={events} />}
       </div>
     );
   }
