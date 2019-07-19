@@ -28,8 +28,6 @@ class FormAndEventsWrapper extends React.Component {
     console.log('A location was submitted: ' + location); // eslint-disable-line no-console
 
     EventsSource.search(location, choice, events => {
-      console.log(events);
-
       this.setState({ value: '', events });
     });
 
@@ -39,7 +37,7 @@ class FormAndEventsWrapper extends React.Component {
   render() {
     const { events, selection, value } = this.state;
     return (
-      <div className="formWrapper">
+      <div>
         <section>
           <form onSubmit={this.handleSubmit}>
             <label>
